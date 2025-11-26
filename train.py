@@ -8,6 +8,17 @@ from pathlib import Path
 from dataset import AccDenoiseDataset
 from model import LSTMDenoiser
 
+def get_best_device():
+    """Get the best available device for PyTorch computation."""
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+    elif torch.backends.mps.is_available() and torch.backends.mps.is_built():
+        return torch.device("mps")
+    else:
+        return torch.device("cpu")
+
+
+
 def main():
     # --- Config ---
     data_path = Path("UCI HAR Dataset/train/Inertial Signals/body_acc_x_train.txt")
@@ -17,9 +28,7 @@ def main():
     lr = 1e-3
     hidden_size = 64
 
-    # NOTE: No CUDA option for HW acceleration on macOS, using MPS backend.
-    # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = get_best_device()      
     print("Using device:", device)
 
     # --- Dataset & loader ---
