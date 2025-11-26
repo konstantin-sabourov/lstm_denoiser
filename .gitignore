@@ -1,0 +1,28 @@
+.venv/
+.env
+.python-version
+
+# uv local caches
+.uv_cache/
+.uv/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.so
+*.dylib
+.pytest_cache/
+.mypy_cache/
+.cache/
+
+# IDE/editor
+.vscode/
+.idea/
+.DS_Store
+
+# Data sets (kept out of Git)
+UCI HAR Dataset/
+
+# Misc
+*.log
