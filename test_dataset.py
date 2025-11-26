@@ -1,9 +1,10 @@
+import numpy as np
 import matplotlib.pyplot as plt
 from dataset import AccDenoiseDataset
 from pathlib import Path
 
 path = Path("UCI HAR Dataset/train/Inertial Signals/body_acc_x_train.txt")
-ds = AccDenoiseDataset(path, noise_std=0.2)
+ds = AccDenoiseDataset(data_array=np.loadtxt(path), noise_std=0.2, fixed_noise=True, seed=42)
 
 noisy, clean = ds[0]
 print("Shapes:", noisy.shape, clean.shape)
