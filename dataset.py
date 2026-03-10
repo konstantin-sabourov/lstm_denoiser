@@ -39,7 +39,7 @@ class AccDenoiseDataset(Dataset):
             noisy = self.noisy_data[idx]
         else:
             # maybe add astype(np.float32)
-            noise = np.random.normal(0, self.noise_std, clean.shape)
+            noise = np.random.normal(0, self.noise_std, clean.shape).astype(np.float32)
             noisy = clean + noise
 
         # maybe add dtype=torch.float32
